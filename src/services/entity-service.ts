@@ -1,15 +1,9 @@
 // import request from 'supertest';
 import { BASE_URL } from '../constants/constants';
-import { espera } from '../expect';
-import { request } from '../http-request';
-
-// const api = createHttpRequest(BASE_URL);
-// Configura o token
-// api.setToken('meu-token-jwt');
+import { espera } from '../core/expect/expect';
+import { request } from '../core/http/http-request';
 
 export class EntityService {
-
-    //Preciso criar um metodo que contenha um espera proprio do framework
 
     public async getList(route: string, statusCode: number, token?: string, content?: any, checkResponseMessage?: string) {
         let req = request(BASE_URL).get(route);
