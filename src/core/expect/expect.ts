@@ -14,20 +14,20 @@ class Expect<T> {
 
     ser(expected: T) {
         if (this.actual !== expected) {
-            throw new ExpectationError(`Espera ${this.actual} ser ${expected}`);
+            throw new ExpectationError(`Retornou ${this.actual} mas esperava ${expected}`);
         }
     }
 
     naoSer(expected: T) {
         if (this.actual === expected) {
-            throw new ExpectationError(`Espera ${this.actual} não ser ${expected}`);
+            throw new ExpectationError(`Retornou ${this.actual} mas esperava não ser ${expected}`);
         }
     }
 
     serIgual(expected: T) {
         if (JSON.stringify(this.actual) !== JSON.stringify(expected)) {
             throw new ExpectationError(
-                `Espera ${JSON.stringify(this.actual)} ser igual a ${JSON.stringify(expected)}`
+                `Retornou ${JSON.stringify(this.actual)} mas esperava ser igual a ${JSON.stringify(expected)}`
             );
         }
     }
@@ -35,7 +35,7 @@ class Expect<T> {
     naoSerIgual(expected: T) {
         if (JSON.stringify(this.actual) === JSON.stringify(expected)) {
             throw new ExpectationError(
-                `Espera ${JSON.stringify(this.actual)} não ser igual a ${JSON.stringify(expected)}`
+                `Retornou ${JSON.stringify(this.actual)} mas esperava não ser igual a ${JSON.stringify(expected)}`
             );
         }
     }
@@ -45,7 +45,7 @@ class Expect<T> {
             throw new ExpectationError(`Espera um número, mas recebeu ${typeof this.actual}`);
         }
         if (this.actual <= expected) {
-            throw new ExpectationError(`Espera ${this.actual} ser maior que ${expected}`);
+            throw new ExpectationError(`Retornou ${this.actual} mas esperava ser maior que ${expected}`);
         }
     }
 
@@ -54,13 +54,13 @@ class Expect<T> {
             throw new ExpectationError(`Espera um número, mas recebeu ${typeof this.actual}`);
         }
         if (this.actual >= expected) {
-            throw new ExpectationError(`Espera ${this.actual} ser menor que ${expected}`);
+            throw new ExpectationError(`Retornou ${this.actual} mas esperava ser menor que ${expected}`);
         }
     }
 
     queExista() {
         if (this.actual === null || this.actual === undefined) {
-            throw new ExpectationError(`Espera que o valor exista, mas recebeu ${this.actual}`);
+            throw new ExpectationError(`Espera que o conteúdo exista, mas recebeu ${this.actual}`);
         }
     }
 

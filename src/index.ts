@@ -1,3 +1,5 @@
+import { hooksManager } from '../src/core/hooks/hooks-manages';
+
 type TestCase = {
     name: string;
     fn: () => void | Promise<void>;
@@ -45,7 +47,7 @@ export async function runTests() {
 
         for (const test of testsToRun) {
             if (test.skip) {
-                console.log(`  \x1b[33m✗ ${test.name} (skipped)\x1b[0m`); // Amarelo
+                console.log(`  \x1b[33m⧖ ${test.name} (skipped)\x1b[0m`); // Amarelo
                 continue;
             }
 
@@ -58,6 +60,22 @@ export async function runTests() {
             }
         }
     }
+}
+
+export function beforeAll(hook: () => Promise<void> | void): void {
+    hooksManager.registerBeforeAll(hook);
+}
+
+export function beforeEach(hook: () => Promise<void> | void): void {
+    hooksManager.registerBeforeEach(hook);
+}
+
+export function afterEach(hook: () => Promise<void> | void): void {
+    hooksManager.registerAfterEach(hook);
+}
+
+export function afterAll(hook: () => Promise<void> | void): void {
+    hooksManager.registerAfterAll(hook);
 }
 
 runTests();

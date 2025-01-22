@@ -1,10 +1,10 @@
-import request from 'supertest';
+import { request, Response } from '../core/http/http-request';
 import { BASE_URL } from '../constants/constants';
 import { data } from '../data/general-data';
 
 export class authorizationToken {
-
-    public async getToken(): Promise<string> {
+   
+    public static async getToken(): Promise<string> {
         try {
             const response = await this.login('auth/token/login/', data.loginData);
             if (response.body && response.body.access) {
@@ -18,11 +18,13 @@ export class authorizationToken {
         }
     }
 
-    public async login(route: string, data: object): Promise<request.Response> {
+    public static async login(route: string, data: object): Promise<Response> {
         try {
-            const response = await request(BASE_URL)
+            let req = request(BASE_URL)
                 .post(route)
                 .send(data);
+
+            const response = await req.execute();
 
             if (response.status !== 200) {
                 throw new Error(`Login failed with status code ${response.status}`);
