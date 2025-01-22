@@ -25,8 +25,12 @@ class HttpRequest {
   }
 
   // Enviando um corpo (body) na requisição
+  // Enviando um corpo (body) na requisição
   send(body: object): this {
     this.body = body;
+    if (!this.headers['Content-Type']) {
+      this.headers['Content-Type'] = 'application/json';
+    }
     return this;
   }
 

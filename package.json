@@ -7,7 +7,7 @@
     "build": "tsc",
     "dev": "ts-node src/index.ts",
     "test": "ts-node src/tests/example-without-token.test.ts",
-    "test:watch": "jest --watch"
+    "test:debug": "node --inspect-brk -r ts-node/register src/tests/example-without-token.test.ts"
   },
   "keywords": [],
   "author": "",

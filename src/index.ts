@@ -37,7 +37,7 @@ export async function runTests() {
 
     for (const suite of suitesToRun) {
         if (suite.skip) {
-            console.log(`\x1b[33mSuite: ${suite.name} (skipped)\x1b[0m`); // Amarelo
+            console.log(`\x1b[33mSuite: ${suite.name} (skipped) ⧖\x1b[0m`); // Amarelo
             continue;
         }
 
@@ -45,11 +45,15 @@ export async function runTests() {
         const onlyTests = suite.tests.filter(test => test.only);
         const testsToRun = onlyTests.length > 0 ? onlyTests : suite.tests;
 
+        await hooksManager.executeBeforeAll();
+
         for (const test of testsToRun) {
             if (test.skip) {
                 console.log(`  \x1b[33m⧖ ${test.name} (skipped)\x1b[0m`); // Amarelo
                 continue;
             }
+
+            await hooksManager.executeBeforeEach();
 
             try {
                 await test.fn();
@@ -58,7 +62,11 @@ export async function runTests() {
                 console.error(`  \x1b[31m✗ ${test.name}\x1b[0m`); // Vermelho
                 console.error(`    ${error}`);
             }
+
+            await hooksManager.executeAfterEach();
         }
+
+        await hooksManager.executeAfterAll();
     }
 }
 

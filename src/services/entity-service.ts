@@ -9,7 +9,7 @@ export class EntityService {
         let req = request(BASE_URL).get(route);
 
         if (token) {
-            req = req.set('Authorization', `{{Bearer}} ${token}`);
+            req = req.set('Authorization', `Bearer ${token}`);
         }
 
         const response = await req.execute();
@@ -33,7 +33,7 @@ export class EntityService {
         let req = request(BASE_URL).get(`${route}` + `${id}`);
 
         if (token) {
-            req = req.set('Authorization', `{{Bearer}} ${token}`);
+            req = req.set('Authorization', `Bearer ${token}`);
         }
 
         const response = await req.execute();
@@ -58,7 +58,7 @@ export class EntityService {
             .post(route)
             .send(data)
         if (token) {
-            req = req.set('Authorization', `{{Bearer}} ${token}`);
+            req = req.set('Authorization', `Bearer ${token}`);
         }
 
         const response = await req.execute();
@@ -82,7 +82,7 @@ export class EntityService {
             .put(route)
             .send(data)
         if (token) {
-            req = req.set('Authorization', `{{Bearer}} ${token}`);
+            req = req.set('Authorization', `Bearer ${token}`);
         }
 
         const response = await req.execute();
@@ -106,7 +106,7 @@ export class EntityService {
             .delete(route)
 
         if (token) {
-            req = req.set('Authorization', `{{Bearer}} ${token}`);
+            req = req.set('Authorization', `Bearer ${token}`);
         }
 
         const response = await req.execute();
