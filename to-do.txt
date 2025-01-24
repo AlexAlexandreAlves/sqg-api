@@ -1,0 +1,9 @@
+1. Melhorar o método que prepara a função de login;
+- Criar função que exporta o token gerado para uma variável global;
+
+3. Testar todas as assertivas;
+
+2. Implementar mais tipos de assertivas;
+
+4. Criar mais testes usando outra api de teste:
+https://fakerestapi.azurewebsites.net/index.html
