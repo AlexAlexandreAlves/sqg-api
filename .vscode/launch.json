@@ -4,11 +4,13 @@
       {
         "type": "node",
         "request": "launch",
-        "name": "Debug Example Test",
+        "name": "Debug Tests",
         "skipFiles": ["<node_internals>/**"],
-        "program": "${workspaceFolder}/src/tests/example-without-token.test.ts",
+        "program": "${workspaceFolder}/src/core/runner/runner.ts",
         "runtimeArgs": ["--inspect-brk", "-r", "ts-node/register"],
-        "outFiles": ["${workspaceFolder}/**/*.js"]
+        "outFiles": ["${workspaceFolder}/**/*.js"],
+        "preLaunchTask": "tsc: build - tsconfig.json",
+        "sourceMaps": true
       }
     ]
   }

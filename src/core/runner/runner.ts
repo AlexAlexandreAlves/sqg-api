@@ -1,4 +1,7 @@
 import { hooksManager } from '../hooks/hooks-manages';
+import fs from 'fs';
+import path from 'path';
+import { runTests } from '../../index';
 
 class Runner {
   private tests: (() => Promise<void>)[] = [];
@@ -28,4 +31,32 @@ class Runner {
   }
 }
 
-export const runner = new Runner();
+// Função para importar dinamicamente todos os arquivos de teste
+function importTestFiles(dir: string, runner: Runner): void {
+  const files = fs.readdirSync(dir);
+
+  files.forEach(file => {
+    const fullPath = path.join(dir, file);
+    const stat = fs.statSync(fullPath);
+
+    if (stat.isDirectory()) {
+      importTestFiles(fullPath, runner); // Recursivamente importa arquivos em subdiretórios
+    } else if (file.endsWith('.test.ts')) {
+      require(fullPath); // Importa o arquivo de teste
+    }
+  });
+}
+
+// Cria uma instância do Runner
+const runner = new Runner();
+
+// Importa todos os arquivos de teste na pasta 'tests'
+importTestFiles(path.join(__dirname, '../../tests'), runner);
+
+// Executa os testes automaticamente
+runner.execute().catch(error => {
+  console.error('Erro ao executar os testes:', error);
+  process.exit(1);
+});
+
+runTests();

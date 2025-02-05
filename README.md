@@ -1,6 +1,6 @@
 # sqg-api Framework
 
-sqg-api framework is a complete and flexible project built with *typeScript*. The project is based on *jest* validations like toBe, toEqual and etc, and also agree you make calls from api's http and https requests like supertest. The framework was created thinking in join the best of the two libraries in only one. You'll able to designed, run and check your test result using only this framework. 
+sqg-api framework is a completed and flexible project built using *typeScript*. The project is based has asserts similar to *jest* framework, like toBe, toEqual and etc. It also allows you to make calls from http and https api's like supertest. The framework was created thinking in join the best of the two libraries in only one. You'll able to designed, run and check your test result using only this framework. 
 
 ## Features
 
@@ -22,7 +22,7 @@ npm install sqg-api
 
 - The project includes a test example to help you start.
 
-- One of the examples demonstrates token-based authentication.
+- One of the examples demonstrates how you can use a pre-setup test with a token authentication.
 
 ### 2. Set up your environment
 
@@ -80,7 +80,7 @@ The project also has some test methods that you can use to build your test suite
     }
 ```
 
-- So, as you can see, the test method it's almost ready, and you need to inform as obligatory just the **route** and **status code** you expect. If you need to setup any **token**, you can define into the method, updating the kind of token you'll need to use, like a Bearer or Basic auth.
+- As you can see, the test method it's almost ready, you just need to inform as obligatory the **route** and **status code** you expect. If you need to setup any **token**, you can define into the method, updating the type of token you'll need to use, like a Bearer or Basic auth.
   
 - The **status code** it's already been checked and comparing with the status code returned in the request.
   

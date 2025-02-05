@@ -2,6 +2,7 @@ import { request, Response } from '../core/http/http-request';
 import { BASE_URL } from '../constants/constants';
 import { data } from '../data/general-data';
 
+
 export class authorizationToken {
    
     public static async getToken(): Promise<string> {

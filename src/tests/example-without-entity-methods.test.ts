@@ -1,6 +1,6 @@
 import { testcase, testsuite, runTests } from '../index';
 import { BASE_URL } from '../constants/constants';
-import { espera } from '../core/expect/expect';
+import { expect } from '../core/expect/expect';
 import { request } from '../core/http/http-request';
 
 
@@ -11,10 +11,8 @@ testsuite('Test without using entity class', () => {
         let req = request(BASE_URL).get('/public/crocodiles/');
         const response = await req.execute();
 
-        espera(response.status).ser(200);
+        expect(response.status).toBe(200);
 
     });
 
 });
-
-runTests();

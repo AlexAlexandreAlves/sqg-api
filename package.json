@@ -6,8 +6,8 @@
     "start": "node dist/index.js",
     "build": "tsc",
     "dev": "ts-node src/index.ts",
-    "test": "ts-node src/tests/example-without-entity-methods.test.ts",
-    "test:debug": "node --inspect-brk -r ts-node/register src/tests/example-without-token.test.ts"
+    "test": "ts-node src/core/runner/runner.ts",
+    "test-example": "ts-node src/tests/example-without-entity-methods.test.ts"
   },
   "keywords": [],
   "author": "",

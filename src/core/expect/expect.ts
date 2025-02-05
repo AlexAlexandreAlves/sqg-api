@@ -12,70 +12,70 @@ class Expect<T> {
         this.actual = actual;
     }
 
-    ser(expected: T) {
+    toBe(expected: T) {
         if (this.actual !== expected) {
-            throw new ExpectationError(`Retornou ${this.actual} mas esperava ${expected}`);
+            throw new ExpectationError(`Returned ${this.actual} but expected ${expected}`);
         }
     }
 
-    naoSer(expected: T) {
+    notBe(expected: T) {
         if (this.actual === expected) {
-            throw new ExpectationError(`Retornou ${this.actual} mas esperava não ser ${expected}`);
+            throw new ExpectationError(`Returned ${this.actual} but expected not be ${expected}`);
         }
     }
 
-    serIgual(expected: T) {
+    beEqual(expected: T) {
         if (JSON.stringify(this.actual) !== JSON.stringify(expected)) {
             throw new ExpectationError(
-                `Retornou ${JSON.stringify(this.actual)} mas esperava ser igual a ${JSON.stringify(expected)}`
+                `Returned ${JSON.stringify(this.actual)} but expected to be equal ${JSON.stringify(expected)}`
             );
         }
     }
 
-    naoSerIgual(expected: T) {
+    notBeEqual(expected: T) {
         if (JSON.stringify(this.actual) === JSON.stringify(expected)) {
             throw new ExpectationError(
-                `Retornou ${JSON.stringify(this.actual)} mas esperava não ser igual a ${JSON.stringify(expected)}`
+                `Returned ${JSON.stringify(this.actual)} but expected not be equal ${JSON.stringify(expected)}`
             );
         }
     }
 
-    serMaiorQue(expected: number) {
+    beBiggerThan(expected: number) {
         if (typeof this.actual !== 'number') {
-            throw new ExpectationError(`Espera um número, mas recebeu ${typeof this.actual}`);
+            throw new ExpectationError(`Expect a number, but received ${typeof this.actual}`);
         }
         if (this.actual <= expected) {
-            throw new ExpectationError(`Retornou ${this.actual} mas esperava ser maior que ${expected}`);
+            throw new ExpectationError(`Returned ${this.actual} but expected be bigger than ${expected}`);
         }
     }
 
-    serMenorQue(expected: number) {
+    beMinorThan(expected: number) {
         if (typeof this.actual !== 'number') {
-            throw new ExpectationError(`Espera um número, mas recebeu ${typeof this.actual}`);
+            throw new ExpectationError(`Expect a number, but received ${typeof this.actual}`);
         }
         if (this.actual >= expected) {
-            throw new ExpectationError(`Retornou ${this.actual} mas esperava ser menor que ${expected}`);
+            throw new ExpectationError(`Returned ${this.actual} but expected be minor than ${expected}`);
         }
     }
 
-    queExista() {
+    shouldExists() {
         if (this.actual === null || this.actual === undefined) {
-            throw new ExpectationError(`Espera que o conteúdo exista, mas recebeu ${this.actual}`);
+            throw new ExpectationError(`Expect the content exists, but received ${this.actual}`);
         }
     }
 
-    queContenha(expected: Record<string, unknown>) {
+    toContain(expected: Record<string, unknown>) {
         if (typeof this.actual !== 'object' || this.actual === null) {
-            throw new ExpectationError(`Espera um objeto, mas recebeu ${typeof this.actual}`);
+            throw new ExpectationError(`Expect a object, but received ${typeof this.actual}`);
         }
 
         for (const key of Object.keys(expected)) {
             if (!Object.prototype.hasOwnProperty.call(this.actual, key)) {
-                throw new ExpectationError(`Falta a chave "${key}" no objeto atual`);
+                throw new ExpectationError(`It doesn't have a "${key}" at the actual object`);
             }
             if ((this.actual as Record<string, unknown>)[key] !== expected[key]) {
                 throw new ExpectationError(
-                    `Esperado que "${key}" tenha valor ${expected[key]}, mas recebeu ${
+                    `Expect that "${key}" contain the value ${expected[key]}, but received ${
                         (this.actual as Record<string, unknown>)[key]
                     }`
                 );
@@ -84,6 +84,6 @@ class Expect<T> {
     }
 }
 
-export function espera<T>(actual: T) {
+export function expect<T>(actual: T) {
     return new Expect(actual);
 }
