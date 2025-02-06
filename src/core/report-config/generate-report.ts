@@ -15,14 +15,14 @@ function generateReport(results: any[]) {
     <style>
         body { font-family: Arial, sans-serif; background-color: #f4f4f9; color: #333; margin: 0; padding: 20px; }
         h1 { text-align: center; color: #444; }
-        .tabs { display: flex; justify-content: center; margin-bottom: 20px; }
+        .tabs { display: flex; justify-content: center; margin-bottom: 20px; flex-wrap: wrap; }
         .tab { padding: 10px 20px; cursor: pointer; background-color: #ddd; border: 1px solid #ccc; border-radius: 5px 5px 0 0; margin-right: 5px; }
         .tab.active { background-color: #fff; border-bottom: none; }
         .tab-content { display: none; }
         .tab-content.active { display: block; }
         .suite { margin-bottom: 20px; padding: 10px; border: 1px solid #ddd; border-radius: 5px; background-color: #fff; }
-        .suite h2 { margin: 0; padding: 10px; background-color: #eee; border-bottom: 1px solid #ddd; }
-        .test { margin-left: 20px; padding: 10px; border: 2px solid; border-radius: 5px; margin-bottom: 10px; position: relative; }
+        .suite h2 { margin: 0; padding: 20px 10px; background-color: #eee; border-bottom: 1px solid #ddd; margin-bottom: 20px; }
+        .test { margin-left: 20px; padding: 20px; border: 2px solid; border-radius: 5px; margin-bottom: 10px; position: relative; }
         .passed { border-color: green; }
         .failed { border-color: red; }
         .skipped { border-color: orange; }
@@ -30,6 +30,11 @@ function generateReport(results: any[]) {
         .toggle-button { position: absolute; top: 10px; right: 10px; cursor: pointer; background-color: #ddd; border: none; padding: 5px; border-radius: 5px; }
         .chart-container { display: flex; justify-content: center; align-items: center; height: 400px; }
         .chart-container canvas { max-width: 100%; max-height: 100%; }
+        @media (max-width: 600px) {
+            .tabs { flex-direction: column; }
+            .tab { margin-right: 0; margin-bottom: 5px; }
+            .toggle-button { position: static; margin-top: 10px; }
+        }
     </style>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>

@@ -16,4 +16,14 @@ testsuite('Test without using entity class', () => {
         return { body: response.body, status: response.status };
     });
 
+    testcase('Negative test', async () => {
+        let req = request(BASE_URL).get('/public/crocodiles/');
+        const response = await req.execute();
+
+        expect(response.status).toBe(401);
+
+        return { body: response.body, status: response.status };
+    });
+
+
 });

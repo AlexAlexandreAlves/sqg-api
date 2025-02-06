@@ -77,7 +77,7 @@ export async function runTests() {
             await hooksManager.executeAfterEach();
         }
 
-        results.push({ suite: suite.name, status: 'completed', tests: suiteResults });
+        results.push({ suite: suite.name, status: 'Completed', tests: suiteResults });
 
         await hooksManager.executeAfterAll();
     }
