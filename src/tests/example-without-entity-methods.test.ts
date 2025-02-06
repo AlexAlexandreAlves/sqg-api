@@ -13,6 +13,7 @@ testsuite('Test without using entity class', () => {
 
         expect(response.status).toBe(200);
 
+        return { body: response.body, status: response.status };
     });
 
 });

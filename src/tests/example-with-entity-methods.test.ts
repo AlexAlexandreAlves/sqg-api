@@ -20,15 +20,15 @@ export const data = {
 testsuite('API Tests example', () => {
 
     testcase('Testando o get List da api crocodiles', async () => {
-        await entity.getList('/public/crocodiles/', 200);
+        return await entity.getList('/public/crocodiles/', 200);
     }, { skip: true });
 
     testcase('Testando o get com validacao token', async () => {
-        await entity.getList('/my/crocodiles/', 200, token);
+        return await entity.getList('/my/crocodiles/', 200, token);
     });
 
     testcase('Testando o post efetuando login', async () => {
-        await entity.create('/auth/token/login/', data.loginData, 200);
+        return await entity.create('/auth/token/login/', data.loginData, 200);
 
     });
 

@@ -10,7 +10,6 @@ export class authorizationToken {
             const response = await this.login('/auth/token/login/', data.loginData);
            
             if (response.body && response.body.access) {
-                console.log(response.body.access)
                 return response.body.access;
             } else {
                 throw new Error('Token not found in response');
