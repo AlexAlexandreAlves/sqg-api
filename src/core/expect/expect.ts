@@ -64,21 +64,24 @@ class Expect<T> {
         }
     }
 
-    toContain(expected: Record<string, unknown>) {
-        if (typeof this.actual !== 'object' || this.actual === null) {
-            throw new ExpectationError(`Expect a object, but received ${typeof this.actual}`);
+    toContain(expected: Record<string, unknown> | string) {
+        if (!Array.isArray(this.actual)) {
+            throw new ExpectationError(`Expect an array, but received ${typeof this.actual}`);
         }
 
-        for (const key of Object.keys(expected)) {
-            if (!Object.prototype.hasOwnProperty.call(this.actual, key)) {
-                throw new ExpectationError(`It doesn't have a "${key}" at the actual object`);
+        if (typeof expected === 'string') {
+            const found = (this.actual as unknown[]).some(actualItem =>
+                typeof actualItem === 'object' && actualItem !== null && expected in actualItem
+            );
+            if (!found) {
+                throw new ExpectationError(`Expect array to contain an object with key "${expected}", but it does not`);
             }
-            if ((this.actual as Record<string, unknown>)[key] !== expected[key]) {
-                throw new ExpectationError(
-                    `Expect that "${key}" contain the value ${expected[key]}, but received ${
-                        (this.actual as Record<string, unknown>)[key]
-                    }`
-                );
+        } else {
+            const found = (this.actual as unknown[]).some(actualItem =>
+                JSON.stringify(actualItem) === JSON.stringify(expected)
+            );
+            if (!found) {
+                throw new ExpectationError(`Expect array to contain ${JSON.stringify(expected)}, but it does not`);
             }
         }
     }

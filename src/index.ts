@@ -42,8 +42,8 @@ export async function runTests() {
 
     for (const suite of suitesToRun) {
         if (suite.skip) {
-            console.log(`\x1b[33mSuite: ${suite.name} (skipped) ⧖\x1b[0m`); // Amarelo
-            results.push({ suite: suite.name, status: 'skipped', tests: [] });
+            console.log(`\x1b[33mSuite: ${suite.name} (Skipped) ⧖\x1b[0m`); // Amarelo
+            results.push({ suite: suite.name, status: 'Skipped', tests: [] });
             continue;
         }
 
@@ -57,8 +57,8 @@ export async function runTests() {
 
         for (const test of testsToRun) {
             if (test.skip) {
-                console.log(`  \x1b[33m⧖ ${test.name} (skipped)\x1b[0m`); // Amarelo
-                suiteResults.push({ test: test.name, status: 'skipped' });
+                console.log(`  \x1b[33m⧖ ${test.name} (Skipped)\x1b[0m`); // Amarelo
+                suiteResults.push({ test: test.name, status: 'Skipped' });
                 continue;
             }
 
@@ -67,11 +67,11 @@ export async function runTests() {
             try {
                 const response = await test.fn();
                 console.log(`  \x1b[32m✓ ${test.name}\x1b[0m`); // Verde
-                suiteResults.push({ test: test.name, status: 'passed', responseBody: response.body, statusCode: response.status });
+                suiteResults.push({ test: test.name, status: 'Passed', responseBody: response.body, statusCode: response.status });
             } catch (error) {
                 console.error(`  \x1b[31m✗ ${test.name}\x1b[0m`); // Vermelho
                 console.error(`    ${error}`);
-                suiteResults.push({ test: test.name, status: 'failed', error: (error as Error).toString() });
+                suiteResults.push({ test: test.name, status: 'Failed', error: (error as Error).toString() });
             }
 
             await hooksManager.executeAfterEach();

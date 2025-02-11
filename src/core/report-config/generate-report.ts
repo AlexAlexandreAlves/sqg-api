@@ -3,9 +3,9 @@ import path from 'path';
 
 function generateReport(results: any[]) {
     const reportPath = path.join(process.cwd(), 'test-report.html');
-    const passedTests = results.reduce((acc, suite) => acc + suite.tests.filter((test: any) => test.status === 'passed').length, 0);
-    const failedTests = results.reduce((acc, suite) => acc + suite.tests.filter((test: any) => test.status === 'failed').length, 0);
-    const skippedTests = results.reduce((acc, suite) => acc + suite.tests.filter((test: any) => test.status === 'skipped').length, 0);
+    const PassedTests = results.reduce((acc, suite) => acc + suite.tests.filter((test: any) => test.status === 'Passed').length, 0);
+    const FailedTests = results.reduce((acc, suite) => acc + suite.tests.filter((test: any) => test.status === 'Failed').length, 0);
+    const skippedTests = results.reduce((acc, suite) => acc + suite.tests.filter((test: any) => test.status === 'Skipped').length, 0);
 
     const html = `
 <!DOCTYPE html>
@@ -23,9 +23,9 @@ function generateReport(results: any[]) {
         .suite { margin-bottom: 20px; padding: 10px; border: 1px solid #ddd; border-radius: 5px; background-color: #fff; }
         .suite h2 { margin: 0; padding: 20px 10px; background-color: #eee; border-bottom: 1px solid #ddd; margin-bottom: 20px; }
         .test { margin-left: 20px; padding: 20px; border: 2px solid; border-radius: 5px; margin-bottom: 10px; position: relative; }
-        .passed { border-color: green; }
-        .failed { border-color: red; }
-        .skipped { border-color: orange; }
+        .Passed { border-color: green; }
+        .Failed { border-color: red; }
+        .Skipped { border-color: orange; }
         .test pre { background-color: #f9f9f9; padding: 10px; border-radius: 5px; display: none; }
         .toggle-button { position: absolute; top: 10px; right: 10px; cursor: pointer; background-color: #ddd; border: none; padding: 5px; border-radius: 5px; }
         .chart-container { display: flex; justify-content: center; align-items: center; height: 400px; }
@@ -89,7 +89,7 @@ function generateReport(results: any[]) {
             data: {
                 labels: ['Passed', 'Failed', 'Skipped'],
                 datasets: [{
-                    data: [${passedTests}, ${failedTests}, ${skippedTests}],
+                    data: [${PassedTests}, ${FailedTests}, ${skippedTests}],
                     backgroundColor: ['green', 'red', 'orange']
                 }]
             }
