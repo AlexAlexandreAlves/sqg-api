@@ -1,6 +1,6 @@
 // import request from 'supertest';
 import { BASE_URL } from '../constants/constants';
-import { espera } from '../core/expect/expect';
+import { expect } from '../core/expect/expect';
 import { request } from '../core/http/http-request';
 
 export class EntityService {
@@ -9,20 +9,20 @@ export class EntityService {
         let req = request(BASE_URL).get(route);
 
         if (token) {
-            req = req.set('Authorization', `{{Bearer}} ${token}`);
+            req = req.set('Authorization', `Bearer ${token}`);
         }
 
         const response = await req.execute();
 
-        espera(response.status).ser(statusCode);
+        expect(response.status).toBe(statusCode);
 
         if (content) {
-            espera(response.body).queExista();
-            espera(response.body).queContenha(content)
+            expect(response.body).shouldExists();
+            expect(response.body).toContain(content)
         }
 
         if (checkResponseMessage) {
-            espera(response.body.message).ser(checkResponseMessage);
+            expect(response.body.message).toBe(checkResponseMessage);
         }
 
         return response;
@@ -33,20 +33,20 @@ export class EntityService {
         let req = request(BASE_URL).get(`${route}` + `${id}`);
 
         if (token) {
-            req = req.set('Authorization', `{{Bearer}} ${token}`);
+            req = req.set('Authorization', `Bearer ${token}`);
         }
 
         const response = await req.execute();
 
-        espera(response.statusCode).ser(statusCode)
+        expect(response.statusCode).toBe(statusCode)
 
         if (content) {
-            espera(response.body).queExista();
-            espera(response.body).queContenha(content);
+            expect(response.body).shouldExists();
+            expect(response.body).toContain(content);
         }
 
         if (checkResponseMessage) {
-            espera(response.body.message).ser(checkResponseMessage);
+            expect(response.body.message).toBe(checkResponseMessage);
         }
 
         return response
@@ -58,20 +58,20 @@ export class EntityService {
             .post(route)
             .send(data)
         if (token) {
-            req = req.set('Authorization', `{{Bearer}} ${token}`);
+            req = req.set('Authorization', `Bearer ${token}`);
         }
 
         const response = await req.execute();
 
-        espera(response.statusCode).ser(statusCode)
+        expect(response.statusCode).toBe(statusCode)
 
         if (content) {
-            espera(response.body).queExista();
-            espera(response.body).queContenha(content);
+            expect(response.body).shouldExists();
+            expect(response.body).toContain(content);
         }
 
         if (checkResponseMessage) {
-            espera(response.body.message).ser(checkResponseMessage);
+            expect(response.body.message).toBe(checkResponseMessage);
         }
 
         return response
@@ -82,20 +82,20 @@ export class EntityService {
             .put(route)
             .send(data)
         if (token) {
-            req = req.set('Authorization', `{{Bearer}} ${token}`);
+            req = req.set('Authorization', `Bearer ${token}`);
         }
 
         const response = await req.execute();
 
-        espera(response.statusCode).ser(statusCode)
+        expect(response.statusCode).toBe(statusCode)
 
         if (content) {
-            espera(response.body).queExista();
-            espera(response.body).queContenha(content);
+            expect(response.body).shouldExists();
+            expect(response.body).toContain(content);
         }
 
         if (checkResponseMessage) {
-            espera(response.body.message).ser(checkResponseMessage);
+            expect(response.body.message).toBe(checkResponseMessage);
         }
 
         return response
@@ -106,20 +106,20 @@ export class EntityService {
             .delete(route)
 
         if (token) {
-            req = req.set('Authorization', `{{Bearer}} ${token}`);
+            req = req.set('Authorization', `Bearer ${token}`);
         }
 
         const response = await req.execute();
 
-        espera(response.statusCode).ser(statusCode)
+        expect(response.statusCode).toBe(statusCode)
 
         if (content) {
-            espera(response.body).queExista();
-            espera(response.body).queContenha(content);
+            expect(response.body).shouldExists();
+            expect(response.body).toContain(content);
         }
 
         if (checkResponseMessage) {
-            espera(response.body.message).ser(checkResponseMessage);
+            expect(response.body.message).toBe(checkResponseMessage);
         }
 
         return response
