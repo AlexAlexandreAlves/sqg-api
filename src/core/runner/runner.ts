@@ -32,7 +32,7 @@ class Runner {
 }
 
 // Função para importar dinamicamente todos os arquivos de teste
-function importTestFiles(dir: string, runner: Runner): void {
+function importTestFiles(dir: string, runner: Runner, specificFile?: string): void {
   const files = fs.readdirSync(dir);
 
   files.forEach(file => {
@@ -40,9 +40,11 @@ function importTestFiles(dir: string, runner: Runner): void {
     const stat = fs.statSync(fullPath);
 
     if (stat.isDirectory()) {
-      importTestFiles(fullPath, runner); // Recursivamente importa arquivos em subdiretórios
+      importTestFiles(fullPath, runner, specificFile); // Recursivamente importa arquivos em subdiretórios
     } else if (file.endsWith('.test.ts')) {
-      require(fullPath); // Importa o arquivo de teste
+      if (!specificFile || fullPath.endsWith(specificFile)) {
+        require(fullPath); // Importa o arquivo de teste
+      }
     }
   });
 }
@@ -50,8 +52,11 @@ function importTestFiles(dir: string, runner: Runner): void {
 // Cria uma instância do Runner
 const runner = new Runner();
 
-// Importa todos os arquivos de teste na pasta 'tests'
-importTestFiles(path.join(__dirname, '../../tests'), runner);
+// Verifica se um arquivo específico foi passado como argumento
+const specificFile = process.argv[2];
+
+// Importa todos os arquivos de teste na pasta 'tests' ou um arquivo específico
+importTestFiles(path.join(__dirname, '../../tests'), runner, specificFile);
 
 // Executa os testes automaticamente
 runner.execute().catch(error => {

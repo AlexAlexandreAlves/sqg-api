@@ -1,6 +1,4 @@
 import { hooksManager } from '../src/core/hooks/hooks-manages';
-import fs from 'fs';
-import path from 'path';
 import generateReport from './core/report-config/generate-report';
 
 type TestCase = {

@@ -41,20 +41,30 @@ class Expect<T> {
     }
 
     beBiggerThan(expected: number) {
-        if (typeof this.actual !== 'number') {
-            throw new ExpectationError(`Expect a number, but received ${typeof this.actual}`);
-        }
-        if (this.actual <= expected) {
-            throw new ExpectationError(`Returned ${this.actual} but expected be bigger than ${expected}`);
+        if (Array.isArray(this.actual)) {
+            if (this.actual.length <= expected) {
+                throw new ExpectationError(`Returned array length ${this.actual.length} but expected be bigger than ${expected}`);
+            }
+        } else if (typeof this.actual === 'number') {
+            if (this.actual <= expected) {
+                throw new ExpectationError(`Returned ${this.actual} but expected be bigger than ${expected}`);
+            }
+        } else {
+            throw new ExpectationError(`Expect a number or an array, but received ${typeof this.actual}`);
         }
     }
 
     beMinorThan(expected: number) {
-        if (typeof this.actual !== 'number') {
-            throw new ExpectationError(`Expect a number, but received ${typeof this.actual}`);
-        }
-        if (this.actual >= expected) {
-            throw new ExpectationError(`Returned ${this.actual} but expected be minor than ${expected}`);
+        if (Array.isArray(this.actual)) {
+            if (this.actual.length >= expected) {
+                throw new ExpectationError(`Returned array length ${this.actual.length} but expected be bigger than ${expected}`);
+            }
+        } else if (typeof this.actual === 'number') {
+            if (this.actual >= expected) {
+                throw new ExpectationError(`Returned ${this.actual} but expected be bigger than ${expected}`);
+            }
+        } else {
+            throw new ExpectationError(`Expect a number or an array, but received ${typeof this.actual}`);
         }
     }
 
@@ -64,24 +74,29 @@ class Expect<T> {
         }
     }
 
+    shouldNotExists() {
+        if (this.actual !== null && this.actual !== undefined) {
+            throw new ExpectationError(`Expect the content not to exist, but received ${this.actual}`);
+        }
+    }
+
     toContain(expected: Record<string, unknown> | string) {
-        if (!Array.isArray(this.actual)) {
-            throw new ExpectationError(`Expect an array, but received ${typeof this.actual}`);
+        if (typeof this.actual !== 'object' || this.actual === null) {
+            throw new ExpectationError(`Expect an object, but received ${typeof this.actual}`);
         }
 
         if (typeof expected === 'string') {
-            const found = (this.actual as unknown[]).some(actualItem =>
-                typeof actualItem === 'object' && actualItem !== null && expected in actualItem
-            );
-            if (!found) {
-                throw new ExpectationError(`Expect array to contain an object with key "${expected}", but it does not`);
+            if (!(expected in this.actual)) {
+                throw new ExpectationError(`Expect object to contain key "${expected}", but it does not`);
             }
         } else {
-            const found = (this.actual as unknown[]).some(actualItem =>
-                JSON.stringify(actualItem) === JSON.stringify(expected)
-            );
-            if (!found) {
-                throw new ExpectationError(`Expect array to contain ${JSON.stringify(expected)}, but it does not`);
+            for (const key in expected) {
+                if (!(key in this.actual)) {
+                    throw new ExpectationError(`Expect object to contain key "${key}", but it does not`);
+                }
+                if ((this.actual as Record<string, unknown>)[key] !== expected[key]) {
+                    throw new ExpectationError(`Expect object to contain key "${key}" with value "${expected[key]}", but received "${(this.actual as Record<string, unknown>)[key]}"`);
+                }
             }
         }
     }
