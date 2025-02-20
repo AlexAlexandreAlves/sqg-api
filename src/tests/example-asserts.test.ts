@@ -1,7 +1,8 @@
-import { afterAll, afterEach, beforeAll, beforeEach, testcase, testsuite } from '../index';
+import { beforeEach, test, scenario } from '../index';
 import { BASE_URL } from '../constants/constants';
 import { expect } from '../core/expect/expect';
 import { request } from '../core/http/http-request';
+import { TestSuite } from '../core/decorators/decorators';
 
 
 export const data = [
@@ -20,9 +21,9 @@ beforeEach(async () => {
     console.log('beforeEach executed');
 });
 
-testsuite('Asserts test example', () => {
+scenario('Asserts test example', () => {
 
-    testcase('Get request using toBe', async () => {
+    test('Get request using toBe', async () => {
         let req = request(BASE_URL).get('/public/crocodiles/');
         const response = await req.execute();
 
@@ -31,7 +32,7 @@ testsuite('Asserts test example', () => {
         return { body: response.body, status: response.status };
     });
 
-    testcase('Negative test - get using notBe', async () => {
+    test('Negative test - get using notBe', async () => {
         let req = request(BASE_URL).get('/public/crocodiles/');
         const response = await req.execute();
 
@@ -40,7 +41,7 @@ testsuite('Asserts test example', () => {
         return { body: response.body, status: response.status };
     });
 
-    testcase('Get using beEqual', async () => {
+    test('Get using beEqual', async () => {
         let req = request(BASE_URL).get('/public/crocodiles/');
         const response = await req.execute();
 
@@ -49,7 +50,7 @@ testsuite('Asserts test example', () => {
         return { body: response.body, status: response.status };
     });
 
-    testcase('Negative test using notBeEqual', async () => {
+    test('Negative test using notBeEqual', async () => {
         let req = request(BASE_URL).get('/public/crocodiles');
         const response = await req.execute();
 
@@ -58,7 +59,7 @@ testsuite('Asserts test example', () => {
         return { body: response.body, status: response.status };
     });
 
-    testcase('Test using beBiggerThan', async () => {
+    test('Test using beBiggerThan', async () => {
         let req = request(BASE_URL).get('/public/crocodiles/');
         const response = await req.execute();
 
@@ -68,7 +69,7 @@ testsuite('Asserts test example', () => {
         return { body: response.body, status: response.status };
     });
 
-    testcase('Test using beMinorThan', async () => {
+    test('Test using beMinorThan', async () => {
         let req = request(BASE_URL).get('/public/crocodiles/');
         const response = await req.execute();
 
@@ -78,7 +79,7 @@ testsuite('Asserts test example', () => {
         return { body: response.body, status: response.status };
     });
 
-    testcase('Test using shouldExists', async () => {
+    test('Test using shouldExists', async () => {
         let req = request(BASE_URL).get('/public/crocodiles/');
         const response = await req.execute();
 
@@ -88,7 +89,7 @@ testsuite('Asserts test example', () => {
         return { body: response.body, status: response.status };
     });
 
-    testcase('Test using toContain', async () => {
+    test('Test using toContain', async () => {
         let req = request(BASE_URL).post('/auth/token/login/')
             .send(data[0].postData);
         const response = await req.execute();
@@ -100,7 +101,7 @@ testsuite('Asserts test example', () => {
         return { body: response.body, status: response.statusCode };
     });
 
-    testcase('Test using put request', async () => {
+    test('Test using put request', async () => {
         let req = request("https://fakerestapi.azurewebsites.net").put('/api/v1/Activities/1')
             .send(data[0].updateData);
         const response = await req.execute();
@@ -111,7 +112,7 @@ testsuite('Asserts test example', () => {
         return { body: response.body, status: response.statusCode };
     });
 
-    testcase('Get request using delete method', async () => {
+    test('Get request using delete method', async () => {
         let req = request("https://fakerestapi.azurewebsites.net").delete('/api/v1/Activities/2');
         const response = await req.execute();
 
