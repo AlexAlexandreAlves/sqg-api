@@ -3,8 +3,8 @@ import path from 'path';
 
 function generateReport(results: any[]) {
     const reportPath = path.join(process.cwd(), 'test-report.html');
-    const passedTests = results.reduce((acc, suite) => acc + suite.tests.filter((test: any) => test.status === 'Passed').length, 0);
-    const failedTests = results.reduce((acc, suite) => acc + suite.tests.filter((test: any) => test.status === 'Failed').length, 0);
+    const PassedTests = results.reduce((acc, suite) => acc + suite.tests.filter((test: any) => test.status === 'Passed').length, 0);
+    const FailedTests = results.reduce((acc, suite) => acc + suite.tests.filter((test: any) => test.status === 'Failed').length, 0);
     const skippedTests = results.reduce((acc, suite) => acc + suite.tests.filter((test: any) => test.status === 'Skipped').length, 0);
 
     const html = `
@@ -89,7 +89,7 @@ function generateReport(results: any[]) {
             data: {
                 labels: ['Passed', 'Failed', 'Skipped'],
                 datasets: [{
-                    data: [${passedTests}, ${failedTests}, ${skippedTests}],
+                    data: [${PassedTests}, ${FailedTests}, ${skippedTests}],
                     backgroundColor: ['green', 'red', 'orange']
                 }]
             }

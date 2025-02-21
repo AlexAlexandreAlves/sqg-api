@@ -22,7 +22,7 @@ export function testcase(name: string, fn: () => { body: any; status: number } |
     if (currentSuite) {
         currentSuite.tests.push({ name, fn, ...options });
     } else {
-        throw new Error('test must be called within a testsuite');
+        throw new Error('testcase must be called within a testsuite');
     }
 }
 
@@ -82,6 +82,8 @@ export async function runTests() {
 
     generateReport(results);
 }
+
+
 
 export function beforeAll(hook: () => Promise<void> | void): void {
     hooksManager.registerBeforeAll(hook);
