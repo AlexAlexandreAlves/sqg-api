@@ -17,16 +17,16 @@ type TestSuite = {
 
 const testSuites: TestSuite[] = [];
 
-export function test(name: string, fn: () => { body: any; status: number } | Promise<{ body: any; status: number }>, options?: { skip?: boolean; only?: boolean }) {
+export function testcase(name: string, fn: () => { body: any; status: number } | Promise<{ body: any; status: number }>, options?: { skip?: boolean; only?: boolean }) {
     const currentSuite = testSuites[testSuites.length - 1];
     if (currentSuite) {
         currentSuite.tests.push({ name, fn, ...options });
     } else {
-        throw new Error('test must be called within a scenario');
+        throw new Error('test must be called within a testsuite');
     }
 }
 
-export function scenario(name: string, fn: () => void, options?: { skip?: boolean; only?: boolean }) {
+export function testsuite(name: string, fn: () => void, options?: { skip?: boolean; only?: boolean }) {
     const suite: TestSuite = { name, tests: [], ...options };
     testSuites.push(suite);
     fn();
