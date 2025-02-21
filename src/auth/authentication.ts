@@ -1,6 +1,13 @@
 import { request, Response } from '../core/http/http-request';
-import { BASE_URL } from '../constants/constants';
-import { data } from '../data/general-data';
+
+const BASE_URL = 'https://test-api.k6.io'
+
+export const data = {
+    loginData: {
+        username: 'usuarioteste02',
+        password: '1234hh'
+    },
+};
 
 
 export class authorizationToken {

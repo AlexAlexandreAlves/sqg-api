@@ -1,8 +1,10 @@
-import { afterAll, afterEach, beforeAll, beforeEach, testcase, testsuite } from '../index';
-import { BASE_URL } from '../constants/constants';
+import { beforeEach, beforeAll, testcase, testsuite } from '../index';
 import { expect } from '../core/expect/expect';
 import { request } from '../core/http/http-request';
+import { skip } from 'node:test';
 
+
+const BASE_URL = 'https://test-api.k6.io'
 
 export const data = [
     {
@@ -16,11 +18,21 @@ export const data = [
     }
 ];
 
-beforeEach(async () => {
-    console.log('beforeEach executed');
+beforeAll(async () => {
+    console.log('beforeAll executed here');
 });
 
 testsuite('Asserts test example', () => {
+
+    testcase('Get request using toBe and skipping the test', async () => {
+        let req = request(BASE_URL).get('/public/crocodiles/');
+        const response = await req.execute();
+
+        expect(response.status).toBe(200);
+
+        return { body: response.body, status: response.status };
+    }, { skip: true }),  
+    
 
     testcase('Get request using toBe', async () => {
         let req = request(BASE_URL).get('/public/crocodiles/');
@@ -29,7 +41,7 @@ testsuite('Asserts test example', () => {
         expect(response.status).toBe(200);
 
         return { body: response.body, status: response.status };
-    });
+    }), skip;
 
     testcase('Negative test - get using notBe', async () => {
         let req = request(BASE_URL).get('/public/crocodiles/');

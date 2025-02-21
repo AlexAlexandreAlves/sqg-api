@@ -1,12 +1,11 @@
 // import request from 'supertest';
-import { BASE_URL } from '../constants/constants';
 import { expect } from '../core/expect/expect';
 import { request } from '../core/http/http-request';
 
 export class EntityService {
 
-    public async getList(route: string, statusCode: number, token?: string, content?: any, checkResponseMessage?: string) {
-        let req = request(BASE_URL).get(route);
+    public async getList(baseUrl: string, route: string, statusCode: number, token?: string, content?: any, checkResponseMessage?: string) {
+        let req = request(baseUrl).get(route);
 
         if (token) {
             req = req.set('Authorization', `Bearer ${token}`);
@@ -29,8 +28,8 @@ export class EntityService {
     }
 
 
-    public async getById(route: string, id: number, statusCode: number, token?: string, content?: any, checkResponseMessage?: string) {
-        let req = request(BASE_URL).get(`${route}` + `${id}`);
+    public async getById(baseUrl: string, route: string, id: number, statusCode: number, token?: string, content?: any, checkResponseMessage?: string) {
+        let req = request(baseUrl).get(`${route}` + `${id}`);
 
         if (token) {
             req = req.set('Authorization', `Bearer ${token}`);
@@ -52,9 +51,9 @@ export class EntityService {
         return response
     };
 
-    public async create(route: string, data: object, statusCode: number, token?: string, content?: any, checkResponseMessage?: string) {
+    public async create(baseUrl: string, route: string, data: object, statusCode: number, token?: string, content?: any, checkResponseMessage?: string) {
 
-        let req = request(BASE_URL)
+        let req = request(baseUrl)
             .post(route)
             .send(data)
         if (token) {
@@ -77,8 +76,8 @@ export class EntityService {
         return response
     };
 
-    public async update(route: string, data: object, statusCode: number, token?: string, content?: any, checkResponseMessage?: string) {
-        let req = request(BASE_URL)
+    public async update(baseUrl: string, route: string, data: object, statusCode: number, token?: string, content?: any, checkResponseMessage?: string) {
+        let req = request(baseUrl)
             .put(route)
             .send(data)
         if (token) {
@@ -101,8 +100,8 @@ export class EntityService {
         return response
     };
 
-    public async delete(route: string, statusCode: number, token?: string, content?: any, checkResponseMessage?: string) {
-        let req = request(BASE_URL)
+    public async delete(baseUrl: string, route: string, statusCode: number, token?: string, content?: any, checkResponseMessage?: string) {
+        let req = request(baseUrl)
             .delete(route)
 
         if (token) {
