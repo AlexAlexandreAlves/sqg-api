@@ -7,8 +7,7 @@
     "build": "tsc",
     "dev": "ts-node src/index.ts",
     "test": "ts-node src/core/runner/runner.ts",
-    "test-example": "ts-node src/tests/example-without-entity-methods.test.ts",
-    "postinstall": "node src/core/hooks/post-install.js"
+    "test-example": "ts-node src/tests/example-without-entity-methods.test.ts"
   },
   "keywords": [],
   "author": "",
