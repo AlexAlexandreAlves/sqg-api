@@ -1,7 +1,6 @@
-// filepath: /c:/Users/alexa/OneDrive/Documentos/Projetos/sqg-api/src/core/hooks/post-install.ts
-import fs from 'fs';
-import path from 'path';
-import { ncp } from 'ncp';
+const fs = require('fs');
+const path = require('path');
+const ncp = require('ncp').ncp;
 
 const source = path.join(__dirname, '../../../src/tests');
 const destination = path.join(process.cwd(), 'tests');
