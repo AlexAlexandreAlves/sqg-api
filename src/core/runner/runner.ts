@@ -1,4 +1,4 @@
-import { hooksManager } from '../hooks/hooks-manages';
+import { hooksManager } from '../hooks/hooks-manager';
 import fs from 'fs';
 import path from 'path';
 import { runTests } from '../../index';
@@ -56,7 +56,7 @@ const runner = new Runner();
 const specificFile = process.argv[2];
 
 // Importa todos os arquivos de teste na pasta 'tests' ou um arquivo específico
-importTestFiles(path.join(__dirname, '../../tests'), runner, specificFile);
+importTestFiles(path.join(process.cwd(), 'src/tests'), runner, specificFile);
 
 // Executa os testes automaticamente
 runner.execute().catch(error => {

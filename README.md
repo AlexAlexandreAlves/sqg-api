@@ -30,11 +30,35 @@ sqg-api framework is a complete and flexible project built using *TypeScript*. T
 - TypeScript Support: Ensures type safety and enhanced developer experience.
 
 ## Installation
-Install the framework via npm:
+First run to install the framework via npm:
 
 ```
 npm install sqg-api
 ```
+
+After run to install to install @types/node
+```
+npm i --save-dev @types/node
+```
+
+At last, let's create the tsconfig.json file:
+```
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "module": "CommonJS",
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "strict": true,
+    "sourceMap": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true
+  },
+  "include": ["src/**/*", "tests/**/*"],
+  "exclude": ["node_modules"]
+}
+```
+
 
 ## Getting Started
 
@@ -51,11 +75,21 @@ npm install sqg-api
 
 ### 3. Run Your Tests:
 
-- Use the following command to execute the tests:
+- Let's set up to run all tests using the command bellow:
    
 ```
-npm run test
+npm test
 ```
+
+- Set up the package.json file like that:
+
+```
+ "scripts": {
+    "test": "ts-node node_modules/sqg-api/src/core/runner/runner.ts"
+  },
+```
+
+
 - The output will be similar to:
 
 ![alt text](image.png)

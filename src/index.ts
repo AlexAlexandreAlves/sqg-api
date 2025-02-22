@@ -1,4 +1,4 @@
-import { hooksManager } from '../src/core/hooks/hooks-manages';
+import { hooksManager } from './core/hooks/hooks-manager';
 import generateReport from './core/report-config/generate-report';
 
 type TestCase = {
