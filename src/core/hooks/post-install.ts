@@ -3,7 +3,7 @@ import fs from 'fs';
 import path from 'path';
 import { ncp } from 'ncp';
 
-const source = path.join(__dirname, '../../../tests');
+const source = path.join(__dirname, '../../../src/tests');
 const destination = path.join(process.cwd(), 'tests');
 
 ncp(source, destination, function (err) {
