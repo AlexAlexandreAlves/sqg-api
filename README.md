@@ -1,25 +1,24 @@
-# sqg-api Framework
-
-sqg-api framework is a complete and flexible project built using *TypeScript*. The project was built based on the *jest* and *supertest* frameworks, allowing the use of assertions like toBe, toEqual, etc., and simulating calls from HTTP and HTTPS APIs like supertest. The framework was created to combine the best of both libraries into one. You'll be able to design, run, and check your test results using only this framework.
 
 - [sqg-api Framework](#sqg-api-framework)
   - [Features](#features)
   - [Installation](#installation)
   - [Getting Started](#getting-started)
-    - [1. Explore Example Tests:](#1-explore-example-tests)
-    - [2. Set up your environment](#2-set-up-your-environment)
-    - [3. Run Your Tests:](#3-run-your-tests)
-  - [Assertions](#assertions)
-  - [Hooks](#hooks)
-  - [Test Methods](#test-methods)
-  - [How to use the Test Methods](#how-to-use-the-test-methods)
-  - [How to use the Test Methods](#how-to-use-the-test-methods-1)
-  - [HTML Report](#html-report)
+    - [1. How to run your tests:](#1-how-to-run-your-tests)
+  - [2. Assertions](#2-assertions)
+  - [3. Hooks](#3-hooks)
+  - [4. Test Methods](#4-test-methods)
+  - [5. How to use the Test Methods](#5-how-to-use-the-test-methods)
+  - [6. HTML Report](#6-html-report)
   - [Included Packages](#included-packages)
   - [Customization](#customization)
   - [Contribution](#contribution)
   - [Future implemantations:](#future-implemantations)
   - [License](#license)
+
+# sqg-api Framework
+
+sqg-api framework is a complete and flexible project built using *TypeScript*. The project was built based on the *jest* and *supertest* frameworks, allowing the use of assertions like toBe, toEqual, etc., and simulating calls from HTTP and HTTPS APIs like supertest. The framework was created to combine the best of both libraries into one. You'll be able to design, run, and check your test results using only this framework.
+
 
 ## Features
 
@@ -41,7 +40,7 @@ After run to install to install @types/node
 npm i --save-dev @types/node
 ```
 
-At last, let's create the tsconfig.json file:
+Now, let's create the tsconfig.json file:
 ```
 {
   "compilerOptions": {
@@ -59,29 +58,7 @@ At last, let's create the tsconfig.json file:
 }
 ```
 
-
-## Getting Started
-
-### 1. Explore Example Tests:
-
-- The project includes some test examples to help you get started.
-
-- One of the examples demonstrates how to use a pre-setup test with token authentication.
-
-### 2. Set up your environment
-
-- The test examples can be run from the base URLs https://test-api.k6.io/ or https://fakerestapi.azurewebsites.net/index.html, two open-source test APIs.
-- If you're using a specific type of authentication, you can set this up in the authentication file. Currently, the test entities are set up to use Bearer token authentication as an example.
-
-### 3. Run Your Tests:
-
-- Let's set up to run all tests using the command bellow:
-   
-```
-npm test
-```
-
-- Set up the package.json file like that:
+- Finally set up the package.json file like that:
 
 ```
  "scripts": {
@@ -89,12 +66,23 @@ npm test
   },
 ```
 
+## Getting Started
 
-- The output will be similar to:
+### 1. How to run your tests:
 
-![alt text](image.png)
+- We can use the next command to run all tests:
+   
+```
+npm test
+```
 
-## Assertions
+- Or we can use the next command to run a single test:
+```
+npm test {my-test-here.test.ts}
+```
+
+
+## 2. Assertions
 
 The framework allows the use of various assertions, comparing the actual result with the expected result. Below is a complete guide to using the assertions:
 
@@ -107,23 +95,8 @@ The framework allows the use of various assertions, comparing the actual result 
 ```shouldExists```
 ```toContain```
 
-You can find test examples in the framework in the test folder -> example-asserts.test.ts. In this file, you can see useful examples like this:
 
-```
-testsuite('Asserts test example', () => {
-
-    testcase('Get request using toBe', async () => {
-        let req = request(BASE_URL).get('/public/crocodiles/');
-        const response = await req.execute();
-
-        expect(response.status).toBe(200);
-
-        return { body: response.body, status: response.status };
-    });
-});
-```
-
-## Hooks
+## 3. Hooks
 The framework has hooks that can be used like beforeEach, beforeAll, afterEach, and afterAll:
 
 ```
@@ -132,9 +105,26 @@ beforeEach(async () => {
 });
 
 ```
-## Test Methods 
+## 4. Test Methods 
 
-Additionally, the project has some test methods that can be used to build your test suite quickly. These methods have a pre-setup and expect some data as parameters, for example:
+- A test file will be similtar to that:
+
+```
+testsuite('Asserts test example', () => {
+
+    testcase('Get request using toBe', async () => {
+        let req = request(BASE_URL).get('/my/endpoint-here/');
+        const response = await req.execute();
+
+        expect(response.status).toBe(200);
+
+        //We need to return the content like this because that's the way to show on the report
+        return { body: response.body, status: response.status };
+    });
+});
+```
+
+- Additionally, the project has some test methods that can be used to build your test suite quickly. These methods have a pre-setup and expect some data as parameters, for example:
 
 ```
   public async getList(route: string, statusCode: number, token?: string, content?: any, checkResponseMessage?: string) {
@@ -171,14 +161,7 @@ Additionally, the project has some test methods that can be used to build your t
   
 - To use these methods, you just need to initialize an Entity class like this: ***const entity = new EntityService();***
 
-## How to use the Test Methods
-
-You'll be able to use five different types of almost ready Test Methods: **getById, getList, create, update, and delete.**
-
-Follow the ***getList*** example below:
-
-
-## How to use the Test Methods
+## 5. How to use the Test Methods
 
 You'll be able to use five different types of almost ready Test Methods: **getById, getList, create, update and delete.**
 
@@ -190,12 +173,8 @@ Follow the ***getList*** example bellow:
     });
 ```
 
-## HTML Report
+## 6. HTML Report
 The framework has an HTML test report that will be created after the test execution. (The report is still in the improvement phase).
-
-![alt text](image-2.png) 
-
-![alt text](image-1.png)
 
 
 ## Included Packages
