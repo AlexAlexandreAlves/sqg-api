@@ -136,15 +136,15 @@ testsuite('Asserts test example', () => {
 
         const response = await req.execute();
 
-        espera(response.status).ser(statusCode);
+        espera(response.status).toBe(statusCode);
 
         if (content) {
-            espera(response.body).queExista();
-            espera(response.body).queContenha(content)
+            espera(response.body).shouldExists();
+            espera(response.body).toContain(content)
         }
 
         if (checkResponseMessage) {
-            espera(response.body.message).ser(checkResponseMessage);
+            espera(response.body.message).toBe(checkResponseMessage);
         }
 
         return response;
