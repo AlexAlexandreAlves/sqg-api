@@ -4,11 +4,11 @@
   - [Installation](#installation)
   - [Getting Started](#getting-started)
     - [1. How to run your tests:](#1-how-to-run-your-tests)
-    - [2. Assertions](#2-assertions)
-    - [3. Hooks](#3-hooks)
-    - [4. Test Methods](#4-test-methods)
-    - [5. How to use the Test Methods](#5-how-to-use-the-test-methods)
-    - [6. HTML Report](#6-html-report)
+  - [2. Assertions](#2-assertions)
+  - [3. Hooks](#3-hooks)
+  - [4. Test Methods](#4-test-methods)
+  - [5. How to use the Test Methods](#5-how-to-use-the-test-methods)
+  - [6. HTML Report](#6-html-report)
   - [Included Packages](#included-packages)
   - [Customization](#customization)
   - [Contribution](#contribution)
@@ -172,6 +172,8 @@ Follow the ***getList*** example bellow:
         await entity.getList('BASEURL/my/endpoint/', 200, token);
     });
 ```
+
+- You can see more test examples on this repository: https://github.com/AlexAlexandreAlves/test-example-sqg-api
 
 ## 6. HTML Report
 The framework has an HTML test report that will be created after the test execution. (The report is still in the improvement phase).
